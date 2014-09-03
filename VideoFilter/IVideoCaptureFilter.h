@@ -7,6 +7,8 @@
 //! @date        08-Apr-13 TS  - Added IVideoCaptureFilter2
 //! @date        14-Nov-13 TS  - Added IVideoCaptureFilter3
 //! @date        21-Jul-14 TS  - Added IVideoCaptureFilter4
+//! @date        12-Aug-14 TS  - Added IVideoCaptureFilter5
+//! @date        28-Aug-14 FDj - MIT license added
 //! @note        Supports Elgato Game Capture HD
 //! @bc -----------------------------------------------------------------------
 //! @ec @par     Copyright
@@ -66,6 +68,10 @@ DEFINE_GUID(IID_IElgatoVideoCaptureFilter3,
 DEFINE_GUID(IID_IElgatoVideoCaptureFilter4,
 0x197992ff, 0xed65, 0x47cb, 0x80, 0x32, 0xd2, 0x87, 0xab, 0x40, 0xb3, 0x3f);
 
+// {7E6E9E9E-4062-4364-99B1-15C2F662B502}
+DEFINE_GUID(IID_IElgatoVideoCaptureFilter5,
+0x7e6e9e9e, 0x4062, 0x4364, 0x99, 0xb1, 0x15, 0xc2, 0xf6, 0x62, 0xb5, 0x2);
+
 /*=============================================================================
 // IElgatoVideoCaptureFilter
 =============================================================================*/
@@ -82,9 +88,9 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter, IUnknown)
 //! Video Capture device type
 typedef enum VIDEO_CAPTURE_FILTER_DEVICE_TYPE
 {
-    VIDEO_CAPTURE_FILTER_DEVICE_TYPE_INVALID                = 0,        //!< Invalid
-    VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD        = 2,        //!< Game Capture HD   (VID: 0x0fd9 PID: 0x0044, 0x004e, 0x0051)
-    VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD60      = 8,        //!< Game Capture HD60 (VID: 0x0fd9 PID: 0x005c)
+    VIDEO_CAPTURE_FILTER_DEVICE_TYPE_INVALID                = 0,            //!< Invalid
+    VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD        = 2,            //!< Game Capture HD   (VID: 0x0fd9 PID: 0x0044, 0x004e, 0x0051)
+    VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD60      = 8,            //!< Game Capture HD60 (VID: 0x0fd9 PID: 0x005c)
     NUM_VIDEO_CAPTURE_FILTER_DEVICE_TYPE
 };
 
@@ -170,8 +176,8 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter2, IElgatoVideoCaptureFilter)
 //! Interface
 DECLARE_INTERFACE_(IElgatoVideoCaptureFilter3, IElgatoVideoCaptureFilter2)
 {
-    // Get A/V delay in milli-seconds (approximate delay between input signal and DirectShow 
-    // filter output)
+    //! Get A/V delay in milli-seconds (approximate delay between input signal and DirectShow 
+    //! filter output)
     STDMETHOD(GetDelayMs)(THIS_ int* pnDelayMs) PURE;
 };
 
@@ -182,14 +188,18 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter3, IElgatoVideoCaptureFilter2)
 //! Messages
 typedef enum VIDEO_CAPTURE_FILTER_NOTIFICATION
 {
-    // Device
+	//! Description: Delay of the device has changed. Call GetDelayMs() to get the new delay.
     VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_DELAY_CHANGED              = 110,      //!< Data: none
-                                                                                    //!< Description: Delay of the device has changed. Call GetDelayMs() to get the new delay.
 
-    // Capture
+	//! Description: Output format has changed. Update your signal path accordingly.
     VIDEO_CAPTURE_FILTER_NOTIFICATION_CAPTURE_OUTPUT_FORMAT_CHANGED     = 305,      //!< Data: none
-                                                                                    //!< Description: Output format has changed. Update your signal path accordingly.
 };
+
+//! Custom event that can be received by IMediaEvent::GetEvent. If SetNotificationCallback() was not set this method is used to send notifications.
+//! lEventCode = VIDEO_CAPTURE_FILTER_EVENT
+//! lParam1    = VIDEO_CAPTURE_FILTER_NOTIFICATION
+//! lParam2    = reserved for future use (e.g. notifications with additional data)
+#define VIDEO_CAPTURE_FILTER_EVENT		EC_USER + 0x0FD9
 
 //! Message callback
 typedef void (CALLBACK* PFN_VIDEO_CAPTURE_FILTER_NOTIFICATION_CALLBACK)(VIDEO_CAPTURE_FILTER_NOTIFICATION nMessage, void* pData, int nSize, void* pContext);
@@ -197,12 +207,34 @@ typedef void (CALLBACK* PFN_VIDEO_CAPTURE_FILTER_NOTIFICATION_CALLBACK)(VIDEO_CA
 //! Interface
 DECLARE_INTERFACE_(IElgatoVideoCaptureFilter4, IElgatoVideoCaptureFilter3)
 {
-    // Check device is present
+    //! Check device is present
     STDMETHOD(GetDevicePresent)(THIS_ BOOL* pfDevicePresent) PURE;
 
-    // Get current device type
+    //! Get current device type
     STDMETHOD(GetDeviceType)(THIS_ VIDEO_CAPTURE_FILTER_DEVICE_TYPE* pnDeviceType) PURE;
 
-    // Set callback to receive notifications
+    //! Set callback to receive notifications
     STDMETHOD(SetNotificationCallback)(THIS_ PFN_VIDEO_CAPTURE_FILTER_NOTIFICATION_CALLBACK pCallback, void* pContext) PURE;
+};
+
+/*=============================================================================
+// IElgatoVideoCaptureFilter5
+=============================================================================*/
+
+//! Extended Settings
+typedef struct _VIDEO_CAPTURE_FILTER_SETTINGS_EX
+{
+	VIDEO_CAPTURE_FILTER_SETTINGS		Settings;
+	BOOL								enableFullFrameRate;				//!< Enable full frame rate (50/60 fps)
+	BYTE								reserved[20 * 1024];
+}VIDEO_CAPTURE_FILTER_SETTINGS_EX, *PVIDEO_CAPTURE_FILTER_SETTINGS_EX;
+typedef const VIDEO_CAPTURE_FILTER_SETTINGS_EX* PCVIDEO_CAPTURE_FILTER_SETTINGS_EX;
+
+DECLARE_INTERFACE_(IElgatoVideoCaptureFilter5, IElgatoVideoCaptureFilter4)
+{
+	//! Get current settings
+	STDMETHOD(GetSettingsEx)(THIS_ PVIDEO_CAPTURE_FILTER_SETTINGS_EX pSettings) PURE;
+
+	//! Set settings
+	STDMETHOD(SetSettingsEx)(THIS_ PCVIDEO_CAPTURE_FILTER_SETTINGS_EX pcSettings) PURE;
 };
