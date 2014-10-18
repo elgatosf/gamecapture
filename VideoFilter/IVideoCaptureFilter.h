@@ -45,15 +45,15 @@
 // FILTER INTERFACE
 =============================================================================*/
 //! Name of the filter as it appears in GraphEdt
-#define VIDEO_CAPTURE_FILTER_NAME            "Elgato Game Capture HD"
+#define VIDEO_CAPTURE_FILTER_NAME				"Elgato Game Capture HD"
 
 //! Name of the filter as it appears in GraphEdt
-#define VIDEO_CAPTURE_FILTER_NAME_L         L"Elgato Game Capture HD"
+#define VIDEO_CAPTURE_FILTER_NAME_L				L"Elgato Game Capture HD"
 
 //! Interface version:
 //! - 1st digit: interface version (e.g. 5 for IElgatoVideoCaptureFilter5)
 //! - 2nd digit: revision (changed e.g. when reserved fields in structures changed their meaning)
-#define VIDEO_CAPTURE_FILTER_INTERFACE_VERSION 51
+#define VIDEO_CAPTURE_FILTER_INTERFACE_VERSION	51
 
 
 // {39F50F4C-99E1-464a-B6F9-D605B4FB5918}
@@ -101,74 +101,74 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter, IUnknown)
 //! Video Capture device type
 typedef enum VIDEO_CAPTURE_FILTER_DEVICE_TYPE
 {
-	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_INVALID                = 0,            //!< Invalid
-	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD        = 2,            //!< Game Capture HD   (VID: 0x0fd9 PID: 0x0044, 0x004e, 0x0051)
-	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD60      = 8,            //!< Game Capture HD60 (VID: 0x0fd9 PID: 0x005c)
+	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_INVALID				= 0,			//!< Invalid
+	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD		= 2,			//!< Game Capture HD   (VID: 0x0fd9 PID: 0x0044, 0x004e, 0x0051)
+	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD60		= 8,			//!< Game Capture HD60 (VID: 0x0fd9 PID: 0x005c)
 	NUM_VIDEO_CAPTURE_FILTER_DEVICE_TYPE
 };
 
 //! Input device
 typedef enum VIDEO_CAPTURE_FILTER_INPUT_DEVICE
 {
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_INVALID               =   0,          //!< Invalid
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_XBOX360               =   1,          //!< Microsoft Xbox 360
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_PLAYSTATION3          =   2,          //!< Sony PlayStation 3
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_IPAD                  =   3,          //!< Apple iPad
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_IPOD_IPHONE           =   4,          //!< Apple iPod or iPhone
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_WII                   =   5,          //!< Nintendo Wii
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_OTHER                 =   6,          //!< Other
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_WII_U                 =   7,          //!< Nintendo Wii U
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_XBOX_ONE              =   8,          //!< Microsoft Xbox One
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_PLAYSTATION4          =   9,          //!< Sony PlayStation 4
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_INVALID				= 0,			//!< Invalid
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_XBOX360				= 1,			//!< Microsoft Xbox 360
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_PLAYSTATION3			= 2,			//!< Sony PlayStation 3
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_IPAD					= 3,			//!< Apple iPad
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_IPOD_IPHONE			= 4,			//!< Apple iPod or iPhone
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_WII					= 5,			//!< Nintendo Wii
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_OTHER					= 6,			//!< Other
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_WII_U					= 7,			//!< Nintendo Wii U
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_XBOX_ONE				= 8,			//!< Microsoft Xbox One
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE_PLAYSTATION4			= 9,			//!< Sony PlayStation 4
 };
 
 //! Video inputs
 typedef enum VIDEO_CAPTURE_FILTER_VIDEO_INPUT
 {
-	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_INVALID                =   0,          //!< Invalid
-	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_COMPOSITE              =   1,          //!< Composite
-	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_SVIDEO                 =   2,          //!< S-Video
-	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_COMPONENT              =   3,          //!< Component
-	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_HDMI                   =   4,          //!< HDMI
+	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_INVALID				= 0,			//!< Invalid
+	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_COMPOSITE				= 1,			//!< Composite
+	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_SVIDEO					= 2,			//!< S-Video
+	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_COMPONENT				= 3,			//!< Component
+	VIDEO_CAPTURE_FILTER_VIDEO_INPUT_HDMI					= 4,			//!< HDMI
 };
 
 //! Video encoder profile
 typedef enum VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE
 {
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_INVALID            = 0x00000000,   //!< Invalid
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_240                = 0x00000001,   //!< 320x240
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_360                = 0x00000002,   //!< 480x360
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_480                = 0x00000004,   //!< 640x480
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_720                = 0x00000008,   //!< 1280x720
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_1080               = 0x00000010,   //!< 1920x1080
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_INVALID			= 0x00000000,	//!< Invalid
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_240				= 0x00000001,	//!< 320x240
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_360				= 0x00000002,	//!< 480x360
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_480				= 0x00000004,	//!< 640x480
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_720				= 0x00000008,	//!< 1280x720
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE_1080				= 0x00000010,	//!< 1920x1080
 };
 
 //! Color range
 typedef enum VIDEO_CAPTURE_FILTER_COLOR_RANGE
 {
-	VIDEO_CAPTURE_FILTER_COLOR_RANGE_INVALID                =   0,          //!< Invalid
-	VIDEO_CAPTURE_FILTER_COLOR_RANGE_FULL                   =   1,          //!< 0-255
-	VIDEO_CAPTURE_FILTER_COLOR_RANGE_LIMITED                =   2,          //!< 16-235
-	VIDEO_CAPTURE_FILTER_COLOR_RANGE_SHOOT                  =   3,          //!<
+	VIDEO_CAPTURE_FILTER_COLOR_RANGE_INVALID				= 0,			//!< Invalid
+	VIDEO_CAPTURE_FILTER_COLOR_RANGE_FULL					= 1,			//!< 0-255
+	VIDEO_CAPTURE_FILTER_COLOR_RANGE_LIMITED				= 2,			//!< 16-235
+	VIDEO_CAPTURE_FILTER_COLOR_RANGE_SHOOT					= 3,			//!<
 };
 
 //! Settings
 typedef struct _VIDEO_CAPTURE_FILTER_SETTINGS
 {
-	TCHAR                                deviceName[256];                   //!< Device name (get only)
-	VIDEO_CAPTURE_FILTER_INPUT_DEVICE    inputDevice;                       //!< Input device (e.g. Xbox360)
-	VIDEO_CAPTURE_FILTER_VIDEO_INPUT     videoInput;                        //!< Video input (e.g. HDMI)
-	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE profile;                           //!< Video encoder profile (maximum resolution)
-	BOOL                                 useAnalogAudioInput;               //!< for HDMI with analog audio input
-	VIDEO_CAPTURE_FILTER_COLOR_RANGE     hdmiColorRange;                    //!< HDMI color range
-	int                                  brightness;                        //!< Brightness (0-10000)
-	int                                  contrast;                          //!< Contrast   (0-10000)
-	int                                  saturation;                        //!< Saturation (0-10000)
-	int                                  hue;                               //!< Hue        (0-10000)
-	int                                  analogAudioGain;                   //!< Analog audio gain  (-60 - 12 dB)
-	int                                  digitalAudioGain;                  //!< Digital audio gain (-60 - 12 dB)
-	BOOL                                 preserveInputFormat;               //!< Input Format will be preserved (e.g. do not convert interlaced to progressive)
-	BOOL                                 stretchStandardDefinitionInput;    //!< Stretch SD input to 16:9
+	TCHAR									deviceName[256];				//!< Device name (get only)
+	VIDEO_CAPTURE_FILTER_INPUT_DEVICE		inputDevice;					//!< Input device (e.g. Xbox360)
+	VIDEO_CAPTURE_FILTER_VIDEO_INPUT		videoInput;						//!< Video input (e.g. HDMI)
+	VIDEO_CAPTURE_FILTER_VID_ENC_PROFILE	profile;						//!< Video encoder profile (maximum resolution)
+	BOOL									useAnalogAudioInput;			//!< for HDMI with analog audio input
+	VIDEO_CAPTURE_FILTER_COLOR_RANGE		hdmiColorRange;					//!< HDMI color range
+	int										brightness;						//!< Brightness (0-10000)
+	int										contrast;						//!< Contrast   (0-10000)
+	int										saturation;						//!< Saturation (0-10000)
+	int										hue;							//!< Hue        (0-10000)
+	int										analogAudioGain;				//!< Analog audio gain  (-60 - 12 dB)
+	int										digitalAudioGain;				//!< Digital audio gain (-60 - 12 dB)
+	BOOL									preserveInputFormat;			//!< Input Format will be preserved (e.g. do not convert interlaced to progressive)
+	BOOL									stretchStandardDefinitionInput;	//!< Stretch SD input to 16:9
 }VIDEO_CAPTURE_FILTER_SETTINGS, *PVIDEO_CAPTURE_FILTER_SETTINGS;
 typedef const VIDEO_CAPTURE_FILTER_SETTINGS* PCVIDEO_CAPTURE_FILTER_SETTINGS;
 
@@ -202,16 +202,16 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter3, IElgatoVideoCaptureFilter2)
 typedef enum VIDEO_CAPTURE_FILTER_NOTIFICATION
 {
 	//! Current device was removed
-	VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_REMOVED					= 101,      //!< Data: none
+	VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_REMOVED					= 101,		//!< Data: none
 
 	//! Delay of the device has changed. Call GetDelayMs() to get the new delay.
-	VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_DELAY_CHANGED              = 110,      //!< Data: none
+	VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_DELAY_CHANGED				= 110,		//!< Data: none
 
 	//! Output format has changed. Update your signal path accordingly.
-	VIDEO_CAPTURE_FILTER_NOTIFICATION_CAPTURE_OUTPUT_FORMAT_CHANGED     = 305,      //!< Data: none
+	VIDEO_CAPTURE_FILTER_NOTIFICATION_CAPTURE_OUTPUT_FORMAT_CHANGED		= 305,		//!< Data: none
 
 	//! Video signal state has changed (e.g. present or lost)
-	VIDEO_CAPTURE_FILTER_NOTIFICATION_VIDEO_SIGNAL_STATE				= 401,      //!< Data: VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE
+	VIDEO_CAPTURE_FILTER_NOTIFICATION_VIDEO_SIGNAL_STATE				= 401,		//!< Data: VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE
 };
 
 //! Video signal state
