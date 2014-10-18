@@ -201,11 +201,27 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter3, IElgatoVideoCaptureFilter2)
 //! Notification messages
 typedef enum VIDEO_CAPTURE_FILTER_NOTIFICATION
 {
+	//! Current device was removed
+	VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_REMOVED					= 101,      //!< Data: none
+
 	//! Delay of the device has changed. Call GetDelayMs() to get the new delay.
 	VIDEO_CAPTURE_FILTER_NOTIFICATION_DEVICE_DELAY_CHANGED              = 110,      //!< Data: none
 
 	//! Output format has changed. Update your signal path accordingly.
 	VIDEO_CAPTURE_FILTER_NOTIFICATION_CAPTURE_OUTPUT_FORMAT_CHANGED     = 305,      //!< Data: none
+
+	//! Video signal state has changed (e.g. present or lost)
+	VIDEO_CAPTURE_FILTER_NOTIFICATION_VIDEO_SIGNAL_STATE				= 401,      //!< Data: VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE
+};
+
+//! Video signal state
+typedef enum VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE
+{
+	VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE_PRESENT						= 0,		//!< Video present
+	VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE_LOST						= 1,		//!< No video
+	VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE_NOT_SUPPORTED				= 2,		//!< Format not supported (e.g. resolution or framerate to high)
+	VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE_DOLBY_NOT_SUPPORTED			= 3,		//!< Audio format not supported (Dolby Digital or Dolby)
+	VIDEO_CAPTURE_FILTER_VIDEO_SIGNAL_STATE_DEVICE_IN_USE				= 4			//!< Device is in use by another application
 };
 
 //! Custom event that can be received by IMediaEvent::GetEvent().
