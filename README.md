@@ -6,7 +6,7 @@ Game Capture HD open source components.
 VideoFilter
 -----------
 
-The IVideoCaptureFilter.h header file is used to find and use the video filter that Elgato Game Capture HD software installs. 
+The IVideoCaptureFilter.h header file is used to find and use the video capture filter that Elgato Game Capture HD software installs. 
 
 
 VideoCaptureFilterSample

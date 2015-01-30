@@ -9,13 +9,14 @@
 //! @date        21-Jul-14 TS  - Added <i>IVideoCaptureFilter4</i>
 //! @date        28-Aug-14 FDj - MIT license added
 //! @date        04-Sep-14 FMB - Added <i>interfaceVersion</i> to VIDEO_CAPTURE_FILTER_SETTINGS_EX
+//! @date        29-Jan-15 FMB - Added MPEG-TS Pin to filter, added interface IElgatoVideoCaptureFilter6
 //!
 //! @note        The DirectShow filter works with
 //!              - Elgato Game Capture HD 
 //!              - Elgato Game Capture HD60
 //! @bc -----------------------------------------------------------------------
 //! @ec @par     Copyright
-//! @n           (c) 2012-14, Elgato Systems. All Rights Reserved.
+//! @n           (c) 2012-15, Elgato Systems. All Rights Reserved.
 //! @n
 //! @n The MIT License (MIT)
 //! @n
@@ -53,20 +54,20 @@
 //! Interface version:
 //! - 1st digit: interface version (e.g. 5 for IElgatoVideoCaptureFilter5)
 //! - 2nd digit: revision (changed e.g. when reserved fields in structures changed their meaning)
-#define VIDEO_CAPTURE_FILTER_INTERFACE_VERSION	51
+#define VIDEO_CAPTURE_FILTER_INTERFACE_VERSION	60
 
 
 // {39F50F4C-99E1-464a-B6F9-D605B4FB5918}
 DEFINE_GUID(CLSID_ElgatoVideoCaptureFilter,
-0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x5, 0xb4, 0xfb, 0x59, 0x18);
+0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x05, 0xb4, 0xfb, 0x59, 0x18);
 
 // {39F50F4C-99E1-464a-B6F9-D605B4FB5919}
 DEFINE_GUID(CLSID_ElgatoVideoCaptureFilterProperties,
-0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x5, 0xb4, 0xfb, 0x59, 0x19);
+0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x05, 0xb4, 0xfb, 0x59, 0x19);
 
 // {39F50F4C-99E1-464a-B6F9-D605B4FB5920}
 DEFINE_GUID(IID_IElgatoVideoCaptureFilter,
-0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x5, 0xb4, 0xfb, 0x59, 0x20);
+0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x05, 0xb4, 0xfb, 0x59, 0x20);
 
 // {585B2914-252E-49bd-B730-7B4C40F4D4E5}
 DEFINE_GUID(IID_IElgatoVideoCaptureFilter2,
@@ -82,7 +83,12 @@ DEFINE_GUID(IID_IElgatoVideoCaptureFilter4,
 
 // {7E6E9E9E-4062-4364-99B1-15C2F662B502}
 DEFINE_GUID(IID_IElgatoVideoCaptureFilter5,
-0x7e6e9e9e, 0x4062, 0x4364, 0x99, 0xb1, 0x15, 0xc2, 0xf6, 0x62, 0xb5, 0x2);
+0x7e6e9e9e, 0x4062, 0x4364, 0x99, 0xb1, 0x15, 0xc2, 0xf6, 0x62, 0xb5, 0x02);
+
+// {39F50F4C-99E1-464a-B6F9-D605B4FB5925}
+DEFINE_GUID(IID_IElgatoVideoCaptureFilter6,
+0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x05, 0xb4, 0xfb, 0x59, 0x25);
+
 
 
 /*=============================================================================
@@ -102,7 +108,7 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter, IUnknown)
 typedef enum VIDEO_CAPTURE_FILTER_DEVICE_TYPE
 {
 	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_INVALID				= 0,			//!< Invalid
-	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD		= 2,			//!< Game Capture HD   (VID: 0x0fd9 PID: 0x0044, 0x004e, 0x0051)
+	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD		= 2,			//!< Game Capture HD   (VID: 0x0fd9 PID: 0x0044, 0x004e, 0x0051, 0x005d)
 	VIDEO_CAPTURE_FILTER_DEVICE_TYPE_GAME_CAPTURE_HD60		= 8,			//!< Game Capture HD60 (VID: 0x0fd9 PID: 0x005c)
 	NUM_VIDEO_CAPTURE_FILTER_DEVICE_TYPE
 };
@@ -191,7 +197,8 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter3, IElgatoVideoCaptureFilter2)
 {
 	//! Get A/V delay in milli-seconds
 	//! (approximate delay between input signal and DirectShow filter output)
-	STDMETHOD(GetDelayMs)(THIS_ int* pnDelayMs) PURE;
+	//! @note Deprecated! use IElgatoVideoCaptureFilter3::GetDelayMs()
+	STDMETHOD(GetDelayMs_Deprecated)(THIS_ int* pnDelayMs) PURE;
 };
 
 /*=============================================================================
@@ -243,7 +250,7 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter4, IElgatoVideoCaptureFilter3)
 	//! Get current device type
 	STDMETHOD(GetDeviceType)(THIS_ VIDEO_CAPTURE_FILTER_DEVICE_TYPE* pnDeviceType) PURE;
 
-	//! Set callback to receive notifications
+	//! Set callback to receive notifications from the filter in your app.
 	STDMETHOD(SetNotificationCallback)(THIS_ PFN_VIDEO_CAPTURE_FILTER_NOTIFICATION_CALLBACK pCallback, void* pContext) PURE;
 };
 
@@ -273,3 +280,14 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter5, IElgatoVideoCaptureFilter4)
 	//! Set settings
 	STDMETHOD(SetSettingsEx)(THIS_ PCVIDEO_CAPTURE_FILTER_SETTINGS_EX pcSettings) PURE;
 };
+
+
+//! Interface IElgatoVideoCaptureFilter6
+DECLARE_INTERFACE_(IElgatoVideoCaptureFilter6, IElgatoVideoCaptureFilter5)
+{
+	//! Get A/V delay in milli-seconds
+	//! @param pnDelayMs latency of stream in milliseconds
+	//! @param forCompressedData true -> get delay for MPEG-TS pin, false -> get delay for audio/video pins
+	STDMETHOD(GetDelayMs)(THIS_ __out int* pnDelayMs, __in bool forCompressedData) PURE;
+};
+
