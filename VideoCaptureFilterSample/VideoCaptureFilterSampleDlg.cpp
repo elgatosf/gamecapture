@@ -216,7 +216,7 @@ AM_MEDIA_TYPE* GetAudioMediaType()
 	return &mt;
 }
 
-void DumpGraph(IFilterGraph2* pIFilterGraph)
+void _DumpGraph(IFilterGraph2* pIFilterGraph)
 {
 	_ASSERTE(NULL != pIFilterGraph);
 	if (NULL != pIFilterGraph)
@@ -432,7 +432,7 @@ HRESULT CVideoCaptureFilterSampleDlg::InitGraph()
 	_ASSERT(SUCCEEDED(hr));	
 
 #ifdef _DEBUG	// Dump graph
-	DumpGraph(pFilterGraph);
+	_DumpGraph(pFilterGraph);
 #endif
 
 	return hr;
@@ -473,7 +473,7 @@ HRESULT CVideoCaptureFilterSampleDlg::ShowProperties()
 					cauuid.cElems,(GUID *)cauuid.pElems, 0, 0, NULL);
 				CoTaskMemFree(cauuid.pElems);
 			}
-		}  
+		}
 	}
 	return hr;
 }

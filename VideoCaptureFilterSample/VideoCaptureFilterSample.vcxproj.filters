@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="VideoCaptureFilterSample.cpp" />
+    <ClCompile Include="VideoCaptureFilterSampleDlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="VideoCaptureFilterSample.h" />
+    <ClInclude Include="VideoCaptureFilterSampleDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VideoCaptureFilterSample.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\VideoCaptureFilterSample.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\VideoCaptureFilterSample.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lib">
+      <UniqueIdentifier>{4070d9ed-c512-4c24-bba2-330b494a10f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\strmbaseu.lib">
+      <Filter>lib</Filter>
+    </Library>
+  </ItemGroup>
+</Project>
