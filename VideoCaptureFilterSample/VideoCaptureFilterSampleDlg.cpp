@@ -127,13 +127,17 @@ void CVideoCaptureFilterSampleDlg::OnCancel()
 #pragma comment(lib, "strmbaseu.lib")		// for <streams.h>
 #pragma comment(lib, "wmcodecdspuuid.lib")	// for UUIDs from <wmcodecdsp.h>
 
-// Filter guid of Elgato Video Capture Filter
-// {39F50F4C-99E1-464a-B6F9-D605B4FB5918}
-DEFINE_GUID(CLSID_VideoCaptureFilter, 
-0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x5, 0xb4, 0xfb, 0x59, 0x18);
+#if 1
+	#include "../VideoCaptureFilter/IVideoCaptureFilter.h"
+#else
+	#define ELGATO_VCF_VIDEO_PID	100	//!< video PID in MPEG-TS stream
+	#define ELGATO_VCF_AUDIO_PID	101	//!< audio PID in MPEG-TS stream
 
-#define VIDEO_PID	100	// video PID in MPEG-TS stream
-#define AUDIO_PID	101	// audio PID in MPEG-TS stream
+	// Filter guid of Elgato Video Capture Filter
+	// {39F50F4C-99E1-464a-B6F9-D605B4FB5918}
+	DEFINE_GUID(CLSID_ElgatoVideoCaptureFilter, 
+	0x39f50f4c, 0x99e1, 0x464a, 0xb6, 0xf9, 0xd6, 0x5, 0xb4, 0xfb, 0x59, 0x18);
+#endif
 
 // renderFromMpegTsPin: true  - use compressed data from the MPEG-TS pin (if present)
 //                      false - use raw data from the video and audio pins
@@ -272,7 +276,7 @@ HRESULT CVideoCaptureFilterSampleDlg::InitGraph()
 	-----------------------------------------------------------------------------*/
 
 	// Add "Elgato Game Capture HD" filter
-	hr = CoCreateInstance(CLSID_VideoCaptureFilter, NULL, CLSCTX_INPROC, IID_IBaseFilter, (void **)&pCapFilter);
+	hr = CoCreateInstance(CLSID_ElgatoVideoCaptureFilter, NULL, CLSCTX_INPROC, IID_IBaseFilter, (void **)&pCapFilter);
 	_ASSERT(SUCCEEDED(hr));
 
 	hr = pFilterGraph->AddFilter(pCapFilter, L"Elgato Game Capture HD");
@@ -328,7 +332,7 @@ HRESULT CVideoCaptureFilterSampleDlg::InitGraph()
 				hr = pVideoPin->QueryInterface(__uuidof(IMPEG2PIDMap), (void**)&pIPidMap);
 				_ASSERT(SUCCEEDED(hr));
 
-				ULONG pid = VIDEO_PID;
+				ULONG pid = ELGATO_VCF_VIDEO_PID;
 				hr = pIPidMap->MapPID(1, &pid, MEDIA_ELEMENTARY_STREAM);
 				_ASSERT(SUCCEEDED(hr));
 			}
@@ -342,7 +346,7 @@ HRESULT CVideoCaptureFilterSampleDlg::InitGraph()
 				hr = pAudioPin->QueryInterface(__uuidof(IMPEG2PIDMap), (void**)&pIPidMap);
 				_ASSERT(SUCCEEDED(hr));
 
-				ULONG pid = AUDIO_PID;
+				ULONG pid = ELGATO_VCF_AUDIO_PID;
 				hr = pIPidMap->MapPID(1, &pid, MEDIA_ELEMENTARY_STREAM);
 				_ASSERT(SUCCEEDED(hr));
 			}

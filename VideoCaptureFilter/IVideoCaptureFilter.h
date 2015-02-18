@@ -51,6 +51,11 @@
 //! Name of the filter as it appears in GraphEdt
 #define VIDEO_CAPTURE_FILTER_NAME_L				L"Elgato Game Capture HD"
 
+
+#define ELGATO_VCF_VIDEO_PID	100	//!< video PID in MPEG-TS stream
+#define ELGATO_VCF_AUDIO_PID	101	//!< audio PID in MPEG-TS stream
+
+
 //! Interface version:
 //! - 1st digit: interface version (e.g. 5 for IElgatoVideoCaptureFilter5)
 //! - 2nd digit: revision (changed e.g. when reserved fields in structures changed their meaning)
