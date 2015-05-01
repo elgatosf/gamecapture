@@ -1,13 +1,15 @@
-Game Capture HD
-===============
+Elgato Game Capture HD
+======================
 
-Game Capture HD open source components.
+Elgato Game Capture HD open source components.
+
+https://www.elgato.com/en/gaming
 
 VideoCaptureFilter
 -------------------
 
 ###### IVideoCaptureFilter.h  
-This header file is used to find and use the video capture filter that Elgato Game Capture HD software installs. 
+This header file is used to find and use the video capture filter that the Elgato Game Capture HD software installs. 
 
 
 VideoCaptureFilterSample
