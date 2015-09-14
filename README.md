@@ -21,6 +21,16 @@ This application sample shows how to build the most simple DirectShow applicatio
 For more details see ReadMe.txt
 
 
-Document History
+Project History
 ----------------
-2014-08-28: Initial version.
+14-Sep-15: 
+	- Support for Elgato Game Capture HD60 Pro
+	- Types are now wrapped in namespace ElgatoGameCapture
+	- Moved types to separate header file
+	- Added new interface IElgatoVideoCaptureFilterEnumeration for Elgato device enumeration
+	
+15-May-15	
+	- Added MPEG-TS output pin to Video Capture Filter
+ 
+28-Aug-14: 
+	- Initial version.
