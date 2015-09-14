@@ -24,13 +24,13 @@ For more details see ReadMe.txt
 Project History
 ----------------
 14-Sep-15: 
-	- Support for Elgato Game Capture HD60 Pro
-	- Types are now wrapped in namespace ElgatoGameCapture
-	- Moved types to separate header file
-	- Added new interface IElgatoVideoCaptureFilterEnumeration for Elgato device enumeration
+* Support for Elgato Game Capture HD60 Pro
+* Types are now wrapped in namespace ElgatoGameCapture
+* Moved types to separate header file
+* Added new interface IElgatoVideoCaptureFilterEnumeration for Elgato device enumeration
 	
 15-May-15	
-	- Added MPEG-TS output pin to Video Capture Filter
+* Added MPEG-TS output pin to Video Capture Filter
  
 28-Aug-14: 
-	- Initial version.
+* Initial version.
