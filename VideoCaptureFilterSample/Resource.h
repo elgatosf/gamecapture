@@ -5,7 +5,8 @@
 #define IDD_VIDEOCAPTUREFILTERSAMPLE_DIALOG 102
 #define IDR_MAINFRAME                   128
 #define IDC_PROPERTIES                  1000
-#define IDC_VIDEOWINDOW                 1001 
+#define IDC_VIDEOWINDOW_RAW             1001
+#define IDC_VIDEOWINDOW_COMPRESSED      1002
 
 // Next default values for new objects
 // 

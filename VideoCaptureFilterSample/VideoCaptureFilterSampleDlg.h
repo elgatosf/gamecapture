@@ -4,6 +4,7 @@
 
 #pragma once
 
+interface IBaseFilter;
 
 // CVideoCaptureFilterSampleDlg dialog
 class CVideoCaptureFilterSampleDlg : public CDialog
@@ -34,6 +35,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedProperties();
+
+	HRESULT QueryCaps();
 
 	HRESULT InitGraph();
 	HRESULT DestroyGraph();
