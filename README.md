@@ -23,6 +23,10 @@ For more details see ReadMe.txt
 
 Project History
 ----------------
+
+05-Apr-16:
+* Support for Elgato Game Capture HD60 S
+
 14-Sep-15: 
 * Support for Elgato Game Capture HD60 Pro
 * Types are now wrapped in namespace ElgatoGameCapture
