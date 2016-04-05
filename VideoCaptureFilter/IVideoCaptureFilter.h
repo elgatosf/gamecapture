@@ -12,13 +12,17 @@
 //! @date        29-Jan-15 FMB - Added MPEG-TS Pin to filter, added interface IElgatoVideoCaptureFilter6
 //! @date        15-May-15 FMB - Added <i>IElgatoVideoCaptureFilterEnumeration</i> to enumerate devices 
 //!                              and query device caps before the filter is added to the filter graph
+//! @date        18-Mar-16 RS  - Added update check
+//! @date        18-Mar-16 FMB - Added support for HD60 S
 //!
 //! @note        The DirectShow filter works with
 //!              - Elgato Game Capture HD 
 //!              - Elgato Game Capture HD60
+//!              - Elgato Game Capture HD60 Pro
+//!              - Elgato Game Capture HD60 S
 //! @bc -----------------------------------------------------------------------
 //! @ec @par     Copyright
-//! @n           (c) 2012-15, Elgato Systems. All Rights Reserved.
+//! @n           (c) 2012-16, Elgato Systems. All Rights Reserved.
 //! @n
 //! @n The MIT License (MIT)
 //! @n
@@ -64,7 +68,7 @@
 //! Interface version:
 //! - 1st digit: interface version (e.g. 5 for IElgatoVideoCaptureFilter5)
 //! - 2nd digit: revision (changed e.g. when reserved fields in structures changed their meaning)
-#define VIDEO_CAPTURE_FILTER_INTERFACE_VERSION	61
+#define VIDEO_CAPTURE_FILTER_INTERFACE_VERSION	62
 
 
 // {39F50F4C-99E1-464a-B6F9-D605B4FB5918}
@@ -198,7 +202,8 @@ DECLARE_INTERFACE_(IElgatoVideoCaptureFilter5, IElgatoVideoCaptureFilter4)
 	//! Get current settings; only available after the filter was added to a filter graph
 	STDMETHOD(GetSettingsEx)(THIS_ ElgatoGameCapture::PVIDEO_CAPTURE_FILTER_SETTINGS_EX pSettings) PURE;
 
-	//! Set settings
+	//! Set settings 
+	//! Initialize VIDEO_CAPTURE_FILTER_SETTINGS_EX with a call of GetSettingsEx() before calling this function.
 	STDMETHOD(SetSettingsEx)(THIS_ ElgatoGameCapture::PCVIDEO_CAPTURE_FILTER_SETTINGS_EX pcSettings) PURE;
 };
 
